@@ -1,7 +1,7 @@
 import { db } from "@/server/db";
-import Image from "next/image";
 import { images } from "@/server/db/schema";
-import { SignedOut, SignedIn } from "@clerk/nextjs";
+import { SignedIn, SignedOut } from "@clerk/nextjs";
+import Image from "next/image";
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
