@@ -1,11 +1,11 @@
-import { db } from "@/server/db";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { images } from "@/server/db/schema";
+import { getCurrentUserImages } from "@/server/queries";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
-import Image from "next/image";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Download, Trash2 } from "lucide-react";
+import Image from "next/image";
 
 export const dynamic = "force-dynamic";
 
@@ -23,14 +23,7 @@ export default async function HomePage() {
 }
 
 const ImageGallery = async () => {
-  const user = auth();
-
-  if (!user.userId) return null;
-
-  const images = await db.query.images.findMany({
-    orderBy: (model, { desc }) => desc(model.id),
-    where: (model, { eq }) => eq(model.userId, user.userId),
-  });
+  const images = await getCurrentUserImages();
 
   return (
     <div className="columns-1 gap-4 sm:columns-2 md:columns-3 lg:columns-4">
