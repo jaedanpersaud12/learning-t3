@@ -18,19 +18,20 @@ import {
  */
 export const createTable = pgTableCreator((name) => `credit-cloud_${name}`);
 
-export const posts = createTable(
-  "post",
+export const images = createTable(
+  "image",
   {
     id: serial("id").primaryKey(),
-    name: varchar("name", { length: 256 }),
+    name: varchar("name", { length: 256 }).notNull(),
+    url: varchar("url", { length: 256 }).notNull(),
     createdAt: timestamp("created_at", { withTimezone: true })
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
-    updatedAt: timestamp("updated_at", { withTimezone: true })
-      .default(sql`CURRENT_TIMESTAMP`)
-      .$onUpdate(() => new Date()),
+    updatedAt: timestamp("updated_at"),
   },
-  (example) => ({
-    nameIndex: index("name_idx").on(example.name),
-  }),
+  // (example) => ({
+  //   nameIndex: index("name_idx").on(example.name),
+  // }),
+  // Can use these index to speed up the query on users by email ?
+  // https://orm.drizzle.team/learn /tutorials/indexing-and-querying-data#indexing-data
 );
