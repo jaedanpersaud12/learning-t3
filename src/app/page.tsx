@@ -3,10 +3,9 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { images } from "@/server/db/schema";
 import { getCurrentUserImages } from "@/server/queries";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
-import { auth } from "@clerk/nextjs/server";
 import { Download, Trash2 } from "lucide-react";
 import Image from "next/image";
-
+import Link from "next/link";
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
@@ -39,15 +38,17 @@ const ImageCard = ({ image }: { image: typeof images.$inferSelect }) => {
     <Card className="mb-4 break-inside-avoid overflow-hidden">
       <CardContent className="p-0">
         <div className="relative w-full">
-          <Image
-            src={image.url}
-            alt={image.name}
-            style={{ objectFit: "contain" }}
-            width={500}
-            height={500}
-            className="h-auto w-full"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
+          <Link href={`/img/${image.id}`}>
+            <Image
+              src={image.url}
+              alt={image.name}
+              // style={{ objectFit: "contain" }}
+              width={500}
+              height={500}
+              className="h-auto w-full"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
+          </Link>
         </div>
       </CardContent>
       <CardFooter className="flex items-center justify-between p-2">
