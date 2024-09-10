@@ -42,6 +42,7 @@ const ImageCard = ({ image }: { image: typeof images.$inferSelect }) => {
           <Image
             src={image.url}
             alt={image.name}
+            style={{ objectFit: "contain" }}
             width={500}
             height={500}
             className="h-auto w-full"
