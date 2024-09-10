@@ -15,7 +15,7 @@ function TopNav() {
         </div>
         <div className="flex items-center gap-4">
           <SignedOut>
-            <Button variant="outline">
+            <Button asChild variant="outline">
               <SignInButton />
             </Button>
           </SignedOut>
@@ -24,12 +24,14 @@ function TopNav() {
           </SignedIn>
         </div>
       </div>
-      <UploadDropzone
-        endpoint="imageUploader"
-        onClientUploadComplete={(res) => {
-          router.refresh();
-        }}
-      />
+      <SignedIn>
+        <UploadDropzone
+          endpoint="imageUploader"
+          onClientUploadComplete={(res) => {
+            router.refresh();
+          }}
+        />
+      </SignedIn>
     </div>
   );
 }

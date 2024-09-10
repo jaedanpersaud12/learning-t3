@@ -1,6 +1,7 @@
 import { db } from "@/server/db";
 import { images } from "@/server/db/schema";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import Image from "next/image";
 export const dynamic = "force-dynamic";
 
@@ -18,8 +19,13 @@ export default async function HomePage() {
 }
 
 const Images = async () => {
+  const user = auth();
+
+  if (!user.userId) return;
+
   const images = await db.query.images.findMany({
     orderBy: (model, { desc }) => desc(model.id),
+    where: (model, { eq }) => eq(model.userId, user.userId),
   });
 
   return (

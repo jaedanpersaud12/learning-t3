@@ -32,6 +32,7 @@ export const ourFileRouter = {
         .values({
           url: file.url,
           name: file.name,
+          userId: metadata.userId,
         })
         .returning();
       // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
