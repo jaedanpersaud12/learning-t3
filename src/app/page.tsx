@@ -3,37 +3,21 @@ import Image from "next/image";
 
 export const dynamic = "force-dynamic";
 
-const mockUrls = [
-  "https://utfs.io/f/901c36d6-45f3-4ac1-b14d-0282ca8736d6-mqi9le.jpg",
-  "https://utfs.io/f/0254134d-6b56-44cc-b21f-e512c420ae72-k9mxhx.jpg",
-];
-
-const mockImages = mockUrls.map((url, index) => {
-  return {
-    id: index + 1,
-    url,
-  };
-});
-
 export default async function HomePage() {
-  const posts = await db.query.posts.findMany();
+  const images = await db.query.images.findMany({
+    orderBy: (model, { desc }) => desc(model.id),
+  });
 
-  console.log(posts);
+  console.log(images);
 
   return (
-    <main className="">
-      {posts.map((post) => (
-        <div key={post.id}>
-          <div className="text-2xl font-bold text-white">{post.name}</div>
+    <main className="mx-10">
+      {images.map((image) => (
+        <div key={image.id}>
+          <div className="text-2xl font-bold text-white">{image.name}</div>
+          <Image src={image.url} alt="mock" width={200} height={200} />
         </div>
       ))}
-      <div className="flex flex-wrap gap-4">
-        {[...mockImages, ...mockImages, ...mockImages].map((image) => (
-          <div key={image.id}>
-            <Image src={image.url} alt="mock" width={200} height={200} />
-          </div>
-        ))}
-      </div>
     </main>
   );
 }
