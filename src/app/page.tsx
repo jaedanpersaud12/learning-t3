@@ -1,13 +1,16 @@
-import { SignedIn, SignedOut } from "@clerk/nextjs";
-export const dynamic = "force-dynamic";
+"use client";
+import { useUser } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
-export default async function HomePage() {
-  return (
-    <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <SignedOut>
-        <div>Please sign in to view the images</div>
-      </SignedOut>
-      <SignedIn></SignedIn>
-    </main>
-  );
+export default function HomePage() {
+  const { isSignedIn } = useUser();
+  const router = useRouter();
+  useEffect(() => {
+    if (isSignedIn) {
+      router.push("/dashboard");
+    } else {
+      router.push("/login");
+    }
+  }, [router, isSignedIn]);
 }
