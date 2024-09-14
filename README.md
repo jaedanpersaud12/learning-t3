@@ -1,4 +1,6 @@
-# Credit Cloud Project
+# Credit Cloud Project 
+
+# This is just a test project, im learning some of the patterns and best practices used in this stack to get betta.
 
 Our plan is to build Credit Cloud using most of the previous scaffolding but with some minor architectural changes.
 
