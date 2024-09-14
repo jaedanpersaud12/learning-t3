@@ -19,7 +19,7 @@ export default function RootLayout({
     <ClerkProvider>
       <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
       <html lang="en" className={`${GeistSans.variable}`}>
-        <body className="flex flex-col gap-4">{children}</body>
+        <body>{children}</body>
       </html>
     </ClerkProvider>
   );
