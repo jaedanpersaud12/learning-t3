@@ -1,5 +1,3 @@
-import { db } from "@/server/db";
-import { images } from "@/server/db/schema";
 import { auth } from "@clerk/nextjs/server";
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
@@ -11,11 +9,13 @@ export const ourFileRouter = {
   // Define as many FileRoutes as you like, each with a unique routeSlug
   imageUploader: f({ image: { maxFileSize: "4MB", maxFileCount: 5 } })
     // Set permissions and file types for this FileRoute
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     .middleware(async ({ req }) => {
       // This code runs on your server before upload
       const user = auth();
 
       // If you throw, the user will not be able to upload
+      // eslint-disable-next-line @typescript-eslint/only-throw-error
       if (!user.userId) throw new UploadThingError("Unauthorized");
 
       // Whatever is returned here is accessible in onUploadComplete as `metadata`
@@ -27,14 +27,14 @@ export const ourFileRouter = {
 
       console.log("file url", file.url);
 
-      const image = await db
-        .insert(images)
-        .values({
-          url: file.url,
-          name: file.name,
-          userId: metadata.userId,
-        })
-        .returning();
+      // const image = await db
+      //   .insert(images)
+      //   .values({
+      //     url: file.url,
+      //     name: file.name,
+      //     userId: metadata.userId,
+      //   })
+      //   .returning();
       // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
       return { uploadedBy: metadata.userId };
     }),

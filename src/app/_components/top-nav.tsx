@@ -1,13 +1,10 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { UploadDropzone } from "@/utils/uploadthing";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 function TopNav() {
-  const router = useRouter();
   return (
     <div className="border-b p-4">
       <div className="flex items-center justify-between">
@@ -27,14 +24,6 @@ function TopNav() {
           </SignedIn>
         </div>
       </div>
-      <SignedIn>
-        <UploadDropzone
-          endpoint="imageUploader"
-          onClientUploadComplete={(res) => {
-            router.refresh();
-          }}
-        />
-      </SignedIn>
     </div>
   );
 }

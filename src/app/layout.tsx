@@ -4,7 +4,6 @@ import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 import { extractRouterConfig } from "uploadthing/server";
-import { TopNav } from "./_components";
 import { ourFileRouter } from "./api/uploadthing/core";
 
 export const metadata: Metadata = {
@@ -15,17 +14,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  modal,
-}: Readonly<{ children: React.ReactNode; modal: React.ReactNode }>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <ClerkProvider>
       <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
       <html lang="en" className={`${GeistSans.variable}`}>
-        <body className="flex flex-col gap-4">
-          <TopNav />
-          {children}
-          {modal}
-        </body>
+        <body className="flex flex-col gap-4">{children}</body>
       </html>
     </ClerkProvider>
   );
