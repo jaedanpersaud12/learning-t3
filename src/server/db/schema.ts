@@ -38,7 +38,6 @@ export const transactionStatusEnum = pgEnum("transaction_status", [
 ]);
 export const userRoleEnum = pgEnum("user_role", [
   "USER",
-  "MEMBER",
   "ADMIN",
   "SUPER_ADMIN",
 ]);
@@ -195,6 +194,7 @@ export const userKycData = createTable("user_kyc_data", {
 
 export const users = createTable("users", {
   id: uuid("id").primaryKey().defaultRandom(),
+  clerkId: varchar("clerk_id", { length: 256 }).notNull(),
   displayName: varchar("display_name", { length: 256 }).notNull(),
   email: varchar("email", { length: 256 }).notNull(),
   phone: varchar("phone", { length: 256 }).notNull(),

@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import Link from "next/link";
 import { UserAuthForm } from "./_components/user-auth-form";
 
@@ -17,12 +16,12 @@ const LoginPage = () => {
               Your Lending Companion & Partner in Innovation
             </div>
 
-            <Image
+            {/* <Image
               src={"/login-graphic.png"}
               width={500}
               height={500}
               alt={""}
-            />
+            /> */}
           </div>
         </div>
         <div className="">

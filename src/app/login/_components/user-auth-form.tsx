@@ -17,9 +17,11 @@ export function UserAuthForm({
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div className={cn("grid gap-6", className)} {...props}>
-      <h1 className="text-2xl font-semibold">Sign In to Credit Cloud</h1>
+      <h1 className="text-center text-2xl font-semibold">
+        Sign In to Credit Cloud
+      </h1>
       <SignedOut>
-        <SignInButton>
+        <SignInButton forceRedirectUrl={"/dashboard"}>
           <Button variant="outline">
             <div className="flex items-center gap-2">
               <Google size={20} />
@@ -30,7 +32,7 @@ export function UserAuthForm({
       </SignedOut>
       <SignedIn>
         <div className="flex flex-col gap-2">
-          <SignOutButton>
+          <SignOutButton redirectUrl="/login">
             <Button variant="outline">Sign Out</Button>
           </SignOutButton>
           <Button asChild>
