@@ -1,6 +1,8 @@
 "use client";
 import Link from "next/link";
 import { UserAuthForm } from "./_components/user-auth-form";
+import { BusinessAuthForm } from "./_components/business-auth-form";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const LoginPage = () => {
   return (
@@ -27,7 +29,18 @@ const LoginPage = () => {
         <div className="">
           <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
             <div className="absolute right-4 top-4">{/* <ModeToggle /> */}</div>
-            <UserAuthForm />
+            <Tabs defaultValue="personal" className="w-full">
+              <TabsList className="grid w-full grid-cols-2">
+                <TabsTrigger value="personal">Personal</TabsTrigger>
+                <TabsTrigger value="business">Business</TabsTrigger>
+              </TabsList>
+              <TabsContent value="personal">
+                <UserAuthForm />
+              </TabsContent>
+              <TabsContent value="business">
+                <BusinessAuthForm />
+              </TabsContent>
+            </Tabs>
             <p className="px-8 text-center text-sm text-muted-foreground">
               By clicking sign-in, you agree to our{" "}
               <Link

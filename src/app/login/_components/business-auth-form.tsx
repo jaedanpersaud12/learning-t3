@@ -6,20 +6,19 @@ import {
   SignUpButton,
 } from "@clerk/nextjs";
 import * as React from "react";
-
 import { Button } from "@/components/ui/button";
 import Google from "@/icons/google";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
-export function UserAuthForm({
+export function BusinessAuthForm({
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div className={cn("grid gap-6", className)} {...props}>
       <h1 className="text-center text-2xl font-semibold">
-        Sign In to Credit Cloud
+        Business Sign In to Credit Cloud
       </h1>
       <SignedOut>
         <div className="grid gap-4">
@@ -27,7 +26,7 @@ export function UserAuthForm({
             <Button variant="outline">
               <div className="flex items-center gap-2">
                 <Google size={20} />
-                Sign in with Google
+                Sign in with Google (Business)
               </div>
             </Button>
           </SignInButton>
@@ -35,7 +34,7 @@ export function UserAuthForm({
             <Button>
               <div className="flex items-center gap-2">
                 <Google size={20} />
-                Sign up with Google
+                Sign up with Google (Business)
               </div>
             </Button>
           </SignUpButton>
